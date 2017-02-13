@@ -1,3 +1,5 @@
+####### ......config.autoload_paths'
+
 require_relative 'boot'
 
 require "rails"

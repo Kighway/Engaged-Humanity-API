@@ -1,6 +1,7 @@
 class Api::V1::UsersController < ApplicationController
 
   def create
+    binding.pry
     @user =User.create(user_params)
     if @user.save
       jwt = Auth.encrypt({userid: @user.id}) #new class

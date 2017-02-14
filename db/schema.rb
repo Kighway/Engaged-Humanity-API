@@ -54,9 +54,8 @@ ActiveRecord::Schema.define(version: 20170214214253) do
     t.string   "last_name"
     t.string   "username"
     t.string   "password_digest"
-    t.integer  "user_interest_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
 end

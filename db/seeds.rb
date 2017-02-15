@@ -91,4 +91,8 @@ andrew.interests << dogs
 # find all interests associated with an article
 # Article.first.interests
 
+# find all of a user's interest's articles
+# User.first.interests.first.articles
+
+# for fun:
 # User.first.articles.first.interests.first.articles.first.users

@@ -13,6 +13,17 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  def login
+    @user = User.find_by(username: params["username"]).try(:authenticate, params["password"])
+    if @user
+
+      jwt = Auth.encrypt({userid: @user.id})
+      render json: {jwt: jwt, validLogin: true}
+    else
+      render json: {jwt: "", validLogin: false}
+    end
+  end
+
   private
 
   def user_params

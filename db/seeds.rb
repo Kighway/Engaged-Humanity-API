@@ -11,10 +11,16 @@ jerk = User.create({first_name: "Donald", last_name: "Unger", username: "donaldu
 #
 # FRIENDSHIPS
 #
+# question: did we need to do the reverse relationship before?
 jenny.friends << kyle
 jenny.friends << andrew
+kyle.friends << jenny
 kyle.friends << andrew
+andrew.friends << jenny
+andrew.friends << kyle
+
 kyle.friends << kyle_friend
+kyle_friend.friends << kyle
 
 #
 # INTERESTS
@@ -81,6 +87,8 @@ andrew.interests << dogs
 
 # find all of a user's friends
 # User.first.friends
+
+# question: did we need to do the reverse relationship before?
 
 # find all of a user's friend's likes
 # User.first.friends.first.likes

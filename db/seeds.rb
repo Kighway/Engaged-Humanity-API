@@ -55,12 +55,12 @@ article4.interests << [Interest.find_by(title: "dogs"), Interest.find_by(title: 
 Like.create(user_id: 1, article_id: 1)
 
 # Kyle likes dogs
-Like.create(user_id: 1, article_id: 2)
+Like.create(user_id: 2, article_id: 2)
 Like.create(user_id: 2, article_id: 3)
 
 # Andrew likes cats, but not puppies
-Like.create(user_id: 1, article_id: 1)
-Like.create(user_id: 2, article_id: 2)
+Like.create(user_id: 3, article_id: 1)
+Like.create(user_id: 3, article_id: 2)
 
 # Donald doesn't like anything
 
@@ -88,7 +88,7 @@ andrew.interests << dogs
 # find all of a user's friends
 # User.first.friends
 
-# question: did we need to do the reverse relationship before?
+
 
 # find all of a user's friend's likes
 # User.first.friends.first.likes

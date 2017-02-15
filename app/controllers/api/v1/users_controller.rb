@@ -1,15 +1,11 @@
 class Api::V1::UsersController < ApplicationController
 
   def create
-    binding.pry
     @user =User.create(user_params)
     if @user.save
       jwt = Auth.encrypt({userid: @user.id}) #new class
-      render json: {username: @user.username,
-                    id: @user.id,
-                    first_name: @user.first_name,
-                    last_name: @user.last_name
-                  }
+      binding.pry
+      render json: {jwt: jwt}
     else
       render json: {response: "hello world"}
     end

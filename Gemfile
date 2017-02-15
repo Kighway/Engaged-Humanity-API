@@ -34,7 +34,7 @@ group :development, :test do
   gem 'pry'
 
   # added for visualization tool 2/14/17
-  gem 'railroady'
+  # gem 'railroady'
 
 end
 

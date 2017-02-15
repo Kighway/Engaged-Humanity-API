@@ -10,11 +10,7 @@ class Auth
     token = JWT.encode(hash, secret_key, ALGORITHM) #JWT.encode( hash,secret_key, ALGORITHM)
   end
 
-
-
-  def self.decode()
+  def self.decode(payload)
+      JWT.decode(payload, secret_key, true, {algorithm: ALGORITHM}).first
   end
-
-
-
 end

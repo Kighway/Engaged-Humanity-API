@@ -1,48 +1,106 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
-# Examples:
+# USERS
 #
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
 
 jenny = User.create({first_name: "Jenny", last_name: "Kats", username: "jennyk", password: "1234"})
 kyle = User.create({first_name: "Kyle", last_name: "Tulod", username: "kylet", password: "1234"})
 andrew = User.create({first_name: "Andrew", last_name: "Nease", username: "andrewn", password: "1234"})
+kyle_friend = User.create({first_name: "Kylo", last_name: "Peterson", username: "kylop", password: "1234"})
+jerk = User.create({first_name: "Donald", last_name: "Unger", username: "donaldu", password: "1234"})
 
-article1 = Article.create({title: "Article1", description: "description1", link: "link1", source: "source1", author: "author1", image_url: "image_url1", date: "date is a string1"})
+#
+# FRIENDSHIPS
+#
+# question: did we need to do the reverse relationship before?
+jenny.friends << kyle
+jenny.friends << andrew
+kyle.friends << jenny
+kyle.friends << andrew
+andrew.friends << jenny
+andrew.friends << kyle
 
-article2 = Article.create({title: "Article2", description: "description2", link: "link2", source: "source2", author: "author2", image_url: "image_url2", date: "date is a string2"})
+kyle.friends << kyle_friend
+kyle_friend.friends << kyle
 
+#
+# INTERESTS
+#
+dogs = Interest.create(title: "dogs")
+cats = Interest.create(title: "cats")
+
+#
+# ARTICLES
+#
+article1 = Article.create({title: "Cat are fantastic.", description: "An article about Cats.", link: "http://www.link1.com", source: "Cat Fancy Mag", author: "Caterina Snowbottom", image_url: "http://www.link1.com/cat.jpg", date: "date is a currently a string"})
+
+article2 = Article.create({title: "Dogs are wonderful.", description: "An article about Dogs.", link: "http://www.link2.com", source: "Dog Power Mag", author: "Rex Fido", image_url: "http://www.link2.com/dog.jpg", date: "date is a currently a string"})
+
+article3 = Article.create({title: "Puppies pee a lot.", description: "A second article about Dogs.", link: "http://www.link3.com", source: "Dog Power Mag", author: "Rex Fido", image_url: "http://www.link3.com/dog2.jpg", date: "date is a currently a string"})
+
+article4 = Article.create({title: "It's raining cats and dogs.", description: "An article about cats and dogs.", link: "http://www.link4.com", source: "Dogs and Cats Together Mag", author: "Max Headspace", image_url: "http://www.link4.com/cat_and_dog.jpg", date: "date is a currently a string"})
+
+#
+# ARTICLE INTERESTS
+#
+article1.interests << Interest.find_by(title: "cats")
+article2.interests << Interest.find_by(title: "dogs")
+article3.interests << Interest.find_by(title: "dogs")
+article4.interests << [Interest.find_by(title: "dogs"), Interest.find_by(title: "cats")]
+
+#
+# LIKES
+#
+
+# Jenny likes cats
 Like.create(user_id: 1, article_id: 1)
+
+# Kyle likes dogs
 Like.create(user_id: 1, article_id: 2)
-Like.create(user_id: 2, article_id: 1)
+Like.create(user_id: 2, article_id: 3)
 
-happiness = Interest.create(title: "Happiness")
-sadness = Interest.create(title: "Sadness")
+# Andrew likes cats, but not puppies
+Like.create(user_id: 1, article_id: 1)
+Like.create(user_id: 2, article_id: 2)
 
-jenny.interests << happiness
-
+# Donald doesn't like anything
 
 
 
 #
-# create_table "friendships", force: :cascade do |t|
-#   t.integer  "user_id"
-#   t.integer  "friend_id"
-#   t.datetime "created_at", null: false
-#   t.datetime "updated_at", null: false
-# end
+# USER INTERESTS
 #
-# create_table "interests", force: :cascade do |t|
-#   t.datetime "created_at", null: false
-#   t.datetime "updated_at", null: false
-# end
-#
-# create_table "likes", force: :cascade do |t|
-#   t.integer  "user_id"
-#   t.integer  "article_id"
-#   t.datetime "created_at", null: false
-#   t.datetime "updated_at", null: false
-# end
-#
+jenny.interests << cats
+kyle.interests << dogs
+andrew.interests << cats
+andrew.interests << dogs
+
+
+
+# NOTES
+# rake db:reset -- drop, create, migrate, seed
+
+# find all of a user's likes
+# User.first.likes
+
+# find all of a user's liked articles
+# User.first.articles
+
+# find all of a user's friends
+# User.first.friends
+
+# question: did we need to do the reverse relationship before?
+
+# find all of a user's friend's likes
+# User.first.friends.first.likes
+
+# find all articles about a topic
+# Interest.first.articles
+
+# find all interests associated with an article
+# Article.first.interests
+
+# find all of a user's interest's articles
+# User.first.interests.first.articles
+
+# for fun:
+# User.first.articles.first.interests.first.articles.first.users

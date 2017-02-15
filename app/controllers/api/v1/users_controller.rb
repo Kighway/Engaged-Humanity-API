@@ -18,9 +18,9 @@ class Api::V1::UsersController < ApplicationController
     if @user
 
       jwt = Auth.encrypt({userid: @user.id})
-      render json: {jwt: jwt, validLogin: true}
+      render json: {jwt: jwt}
     else
-      render json: {jwt: "", validLogin: false}
+      render json: {jwt: ""}
     end
   end
 

@@ -2,14 +2,21 @@ class Api::V1::UsersController < ApplicationController
 
   def create
     @user =User.create(user_params)
+
+    # if the user is valid...
     if @user.save
-      jwt = Auth.encrypt({userid: @user.id}) #new class
-      # here, we are sending back the jwt for session storage
-      # and the username for displaying it to the user
+      # encrypt the user_id...
+      jwt = Auth.encrypt({userid: @user.id})
+
+      # and send it back as a response with the username
+      # the jwt will be set to session storage
+      # the username will be set to currentUser in the store
       render json: {jwt: jwt, username: @user.username}
     else
 
       # here, we are sending back an error message
+      # that we are not handling yet
+      # if the create user fails
       render json: {:errors=>
        [{:detail=>"incorrect email or password",
          :source=>{:pointer=>"user/err_type"}}
@@ -18,35 +25,36 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def login
+    # authenticate the user
     @user = User.find_by(username: params["username"]).try(:authenticate, params["password"])
-    if @user
 
+    # if the login is valid...
+    if @user
       jwt = Auth.encrypt({userid: @user.id})
 
-      # here, we are sending back the jwt for session storage
-      # and the username for displaying it to the user
-      # the session storage will be sent back later to decrypt
+      # send the jwt string and username as a response
       render json: {jwt: jwt, username: @user.username}
     else
 
       #when we only send back an empty string,
       # react can know that the login was not authenticated
-      render json: {jwt: "", username: ""}
+      render json: {jwt: "", username: "", error: "username and/or password not valid"}
     end
   end
 
+
+
   def the_current_user
 
-    # QUESTION:  When there is no session data,
-    # why are we sending a blank header ""
-    # just to send back an empty response?
-    # Does this make any sense, or should there some other way
-    # to determine if there's no sessiondata on the
-    # client side?
+    # Currently, when there is no session data,
+    # we're sending a blank header ""
+    # just to send back an empty response...
+
+    # We should probably just handle this on the client side.
+
     session_data_jwt = request.headers['HTTP_AUTHORIZATION']
 
     # above will be either "" or a string jwt encryted
-    # so the response should be determined by that...
 
     # if the session data is blank...
     if session_data_jwt.length == 0
@@ -55,19 +63,17 @@ class Api::V1::UsersController < ApplicationController
 
     # else if session data is a jwt string
     else
-      hat = Auth.decode(session_data_jwt)
-      user = User.find(hat["userid"])
+      jwt_user_id = Auth.decode(session_data_jwt)
+      user = User.find(jwt_user_id["userid"])
       render json: {username: user.username }
     end
 
   end
 
-
   private
 
   def user_params
     params.permit(:first_name, :last_name, :username, :password, :password_confirmation)
-    # params.require(:user).permit(:first_name, :last_name, :password, :password_confirmation)
   end
 
 end

@@ -2,13 +2,10 @@ module Api
   module V1
     class ArticlesController < ApplicationController
       def index
-#         @user = active_user
-#        user = User.find(1)
 
+        jwt_from_session = request.headers['HTTP_AUTHORIZATION']
 
-        session_data_jwt = request.headers['HTTP_AUTHORIZATION']
-
-        if session_data_jwt.length == 0
+        if jwt_from_session.length == 0
 
           # send back no articles
           @articles_by_interest = []
@@ -16,26 +13,14 @@ module Api
 
         # else if session data is a jwt string
         else
-          hat = Auth.decode(session_data_jwt)
-          user = User.find(hat["userid"])
+          jwt_user_id = Auth.decode(jwt_from_session)
+          user = User.find(jwt_user_id["userid"])
 
-          #combine user's interests' articles + user's friends' liked articles
+          # get articles that a user is interested in
           @articles_by_interest = user.interests.collect {|interest| interest.articles}.flatten.uniq
+          # get articles that a friend has liked
           @articles_by_friends_likes = user.friends.collect {|friend| friend.articles}.flatten.uniq
         end
-
-
-
-
-#        jwtencrypted = request.headers['HTTP_AUTHORIZATION']
-
-        # {userid: 3}
-#        hat = Auth.decode(jwtencrypted)
-
-#        user = User.find(hat["userid"])
-
-
-#        binding.pry
 
         render json: {articles_by_interest: @articles_by_interest, articles_by_friends_likes: @articles_by_friends_likes}
       end

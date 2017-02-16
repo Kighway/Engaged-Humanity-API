@@ -11,15 +11,18 @@ jerk = User.create({first_name: "Donald", last_name: "Unger", username: "donaldu
 #
 # FRIENDSHIPS
 #
-# question: did we need to do the reverse relationship before?
+
+# jenny follows kyle and andrew
 jenny.friends << kyle
 jenny.friends << andrew
+
+# kyle follows jenny
 kyle.friends << jenny
-kyle.friends << andrew
-andrew.friends << jenny
+
+# andrew follows kyle
 andrew.friends << kyle
 
-kyle.friends << kyle_friend
+# kyle's friend follows kyle
 kyle_friend.friends << kyle
 
 #

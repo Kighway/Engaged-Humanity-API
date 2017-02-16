@@ -13,8 +13,11 @@ module Api
 
         # else if session data is a jwt string
         else
-          jwt_user_id = Auth.decode(jwt_from_session)
-          user = User.find(jwt_user_id["userid"])
+          # can probably delete this:
+          # jwt_user_id = Auth.decode(jwt_from_session)
+          # user = User.find(jwt_user_id["userid"])
+
+          user = active_user
 
           # get articles that a user is interested in
           @articles_by_interest = user.interests.collect {|interest| interest.articles}.flatten.uniq
@@ -29,6 +32,38 @@ module Api
         @article = Article.find(params[:id])
         render json: @article
       end
+
+      def like_article
+
+        article_id = params[:id]
+        user = active_user
+
+
+        # potential place to think about edge cases
+        # where someone could make a get request
+
+        # this will return nil if the article isn't found
+        # if it is found, it will return the like
+        @like = user.likes.find_by(article_id: article_id)
+
+
+        # if the liked article isn't nil
+        if @like
+          Like.delete(@like.id)
+        else
+
+#          user.articles << Article.find(params[:id])
+          user.likes << Like.create(user_id: user.id, article_id: article_id)
+        end
+
+
+
+
+
+      end
+
+
+
 
       def create
       end

@@ -34,32 +34,18 @@ module Api
       end
 
       def like_article
-
         article_id = params[:id]
         user = active_user
-
-
-        # potential place to think about edge cases
-        # where someone could make a get request
-
+        # potential place to think about edge cases where someone could make a get request
         # this will return nil if the article isn't found
         # if it is found, it will return the like
         @like = user.likes.find_by(article_id: article_id)
-
-
         # if the liked article isn't nil
         if @like
           Like.delete(@like.id)
         else
-
-#          user.articles << Article.find(params[:id])
-          user.likes << Like.create(user_id: user.id, article_id: article_id)
+          Like.create(user_id: user.id, article_id: article_id)
         end
-
-
-
-
-
       end
 
 

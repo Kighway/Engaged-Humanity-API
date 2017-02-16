@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :articles
       post 'signup', to: 'users#create'
       post 'signin', to: 'users#login'
+      get 'current_user', to: 'users#the_current_user'
     end
   end
 

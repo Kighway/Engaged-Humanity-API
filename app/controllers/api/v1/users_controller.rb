@@ -65,7 +65,7 @@ class Api::V1::UsersController < ApplicationController
     else
       jwt_user_id = Auth.decode(session_data_jwt)
       user = User.find(jwt_user_id["userid"])
-      render json: {username: user.username }
+      render json: user
     end
 
   end

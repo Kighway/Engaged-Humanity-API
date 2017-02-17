@@ -29,12 +29,18 @@ module Api
 #        end
 
 
+#        did not work
+#        test = render json: @articles_by_interest
 
-        # render json: {articles_by_interest: @articles_by_interest, articles_by_friends_likes: @articles_by_friends_likes}
 
-        # @articles = Article.all
+
+        #  render json: {articles_by_interest: @articles_by_interest, articles_by_friends_likes: @articles_by_friends_likes}
+
+#         @articles = Article.all
+         render json: user, serializer: UserWithFeedSerializer
 #        render json: @articles_by_friend_likes
-        render json: @articles_by_interest
+
+#        render json: @articles_by_interest
 
 
       end

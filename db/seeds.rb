@@ -42,6 +42,8 @@ article3 = Article.create({title: "Puppies pee a lot.", description: "A second a
 
 article4 = Article.create({title: "It's raining cats and dogs.", description: "An article about cats and dogs.", link: "http://www.link4.com", source: "Dogs and Cats Together Mag", author: "Max Headspace", image_url: "http://www.link4.com/cat_and_dog.jpg", date: "date is a currently a string"})
 
+article5 = Article.create({title: "Puppies pee.  So what?", description: "An article about puppies still peeing.", link: "http://www.link5.com", source: "Puppy Power Mag", author: "Max Headspace", image_url: "http://www.link5.com/peeing_puppy.jpg", date: "date is still a string"})
+
 #
 # ARTICLE INTERESTS
 #
@@ -49,6 +51,7 @@ article1.interests << Interest.find_by(title: "cats")
 article2.interests << Interest.find_by(title: "dogs")
 article3.interests << Interest.find_by(title: "dogs")
 article4.interests << [Interest.find_by(title: "dogs"), Interest.find_by(title: "cats")]
+article5.interests << Interest.find_by(title: "dogs")
 
 #
 # LIKES
@@ -58,6 +61,7 @@ article4.interests << [Interest.find_by(title: "dogs"), Interest.find_by(title: 
 Like.create(user_id: 1, article_id: 1)
 
 # Kyle likes two dog articles
+Like.create(user_id: 2, article_id: 5)
 Like.create(user_id: 2, article_id: 2)
 Like.create(user_id: 2, article_id: 3)
 

@@ -54,14 +54,14 @@ article4.interests << [Interest.find_by(title: "dogs"), Interest.find_by(title: 
 # LIKES
 #
 
-# Jenny likes cats
+# Jenny likes cat article
 Like.create(user_id: 1, article_id: 1)
 
-# Kyle likes dogs
+# Kyle likes two dog articles
 Like.create(user_id: 2, article_id: 2)
 Like.create(user_id: 2, article_id: 3)
 
-# Andrew likes cats, but not puppies
+# Andrew likes cat article 1, and dog article 2, but not puppies
 Like.create(user_id: 3, article_id: 1)
 Like.create(user_id: 3, article_id: 2)
 

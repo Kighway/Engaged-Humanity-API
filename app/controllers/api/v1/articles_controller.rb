@@ -2,6 +2,7 @@ module Api
   module V1
     class ArticlesController < ApplicationController
       def index
+        binding.pry
 
         jwt_from_session = request.headers['HTTP_AUTHORIZATION']
 

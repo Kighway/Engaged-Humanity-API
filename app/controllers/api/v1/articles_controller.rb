@@ -2,56 +2,9 @@ module Api
   module V1
     class ArticlesController < ApplicationController
       def index
-
-        # jwt_from_session = request.headers['HTTP_AUTHORIZATION']
-        #
-        # if jwt_from_session.length == 0
-        #
-        #   # send back no articles
-        #   @articles_by_interest = []
-        #   @articles_by_friends_likes = []
-        #
-        # # else if session data is a jwt string
-        # else
-          # can probably delete this:
-          # jwt_user_id = Auth.decode(jwt_from_session)
-          user = User.find(1)
-
-#          user = active_user
-
-
-
-
-          # get articles that a user is interested in
-          @articles_by_interest = user.interests.collect {|interest| interest.articles}.flatten.uniq
-          # get articles that a friend has liked
-          @articles_by_friends_likes = user.friends.collect {|friend| friend.articles}.flatten.uniq
-#        end
-
-
-#        did not work
-#        test = render json: @articles_by_interest
-
-
-
-        #  render json: {articles_by_interest: @articles_by_interest, articles_by_friends_likes: @articles_by_friends_likes}
-
-#         @articles = Article.all
-         render json: user, serializer: UserWithFeedSerializer
-#        render json: @articles_by_friend_likes
-
-#        render json: @articles_by_interest
-
-
+        user = active_user
+        render json: user, serializer: UserFeedSerializer
       end
-
-
-
-
-
-
-
-
 
       def show
         @article = Article.find(params[:id])

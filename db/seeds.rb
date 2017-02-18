@@ -13,17 +13,17 @@ jerk = User.create({first_name: "Donald", last_name: "Unger", username: "donaldu
 #
 
 # jenny follows kyle and andrew
-jenny.following << kyle
-jenny.following << andrew
+jenny.followings << kyle
+jenny.followings << andrew
 
 # kyle follows jenny
-kyle.following << jenny
+kyle.followings << jenny
 
 # andrew follows kyle
-andrew.following << kyle
+andrew.followings << kyle
 
 # kyle's friend follows kyle
-kyle_friend.following << kyle
+kyle_friend.followings << kyle
 
 #
 # INTERESTS

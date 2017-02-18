@@ -2,7 +2,7 @@ class User < ApplicationRecord
 
   has_many :friendships
 
-  has_many :following, :through => :friendships, source: :friend
+  has_many :followings, :through => :friendships, source: :friend
   has_many :inverse_friendships, :class_name => 'Friendship', foreign_key: "friend_id"
 
   has_many :followers, through: :inverse_friendships, source: :user
@@ -14,11 +14,5 @@ class User < ApplicationRecord
 
 
   has_secure_password
-
-  # def followers
-  #
-  #   self.friendships.join
-  #
-  # end
 
 end

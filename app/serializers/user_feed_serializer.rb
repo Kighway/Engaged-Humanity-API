@@ -4,13 +4,12 @@ class UserFeedSerializer < ActiveModel::Serializer
   def by_interests
     object.interests.each.with_object({}) do |interest, hash|
       interest.articles.each do |article|
-        if hash["#{interest.title}"]
-          hash["#{interest.title}"]["articles"]["#{article.id}"] = {article: article, liked: !!object.likes.find_by(article_id: article.id)}
+        if hash["#{article.id}"]
+          hash["#{article.id}"]['interests'] << { id: interest.id }
         else
-          hash["#{interest.title}"] = {interest_title: interest.title}
-          hash["#{interest.title}"]["interest_id"] = interest.id
-          hash["#{interest.title}"]["articles"] = {}
-          hash["#{interest.title}"]["articles"]["#{article.id}"] = {article: article, liked: !!object.likes.find_by(article_id: article.id)}
+          hash["#{article.id}"] = {article: article, liked: !!object.likes.find_by(article_id: article.id)}
+          hash["#{article.id}"]['interests'] = []
+          hash["#{article.id}"]['interests'] << { id: interest.id, interest_name: interest.title }
         end
       end
     end

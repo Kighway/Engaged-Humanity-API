@@ -36,6 +36,35 @@ class Api::V1::UsersController < ApplicationController
 
   end
 
+  def add_interest
+
+    add_interest_params[:interest]
+
+    interest = Interest.find_by(title: add_interest_params[:interest])
+
+    # if the interest exist...
+    if interest
+
+      # if the active user doesn't already have this interest...
+      if !active_user.interest_ids.include?(interest.id)
+        # add the interest to the user
+        active_user.interests << interest
+        # return the interest
+        render json: interest
+      else
+        # return the interest
+        render json: interest
+      end
+    else
+
+      # create Interest and return it
+      new_interest = Interest.create(title: add_interest_params[:interest])
+
+      render json: new_interest
+    end
+  end
+
+
   private
 
   def create_user_params
@@ -45,4 +74,9 @@ class Api::V1::UsersController < ApplicationController
   def login_params
     params.permit(:username, :password)
   end
+
+  def add_interest_params
+    params.permit(:interest)
+  end
+
 end

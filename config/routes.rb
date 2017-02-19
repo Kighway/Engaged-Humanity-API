@@ -9,6 +9,8 @@ Rails.application.routes.draw do
       post 'signin', to: 'users#login'
       get 'current_user', to: 'users#the_current_user'
       post 'articles/:id/like', to: 'articles#like_article'
+      post 'add-interest', to: 'users#add_interest'
+
     end
   end
 

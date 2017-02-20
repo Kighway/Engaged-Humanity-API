@@ -12,7 +12,7 @@ module Api
       end
 
       def like_article
-        article_id = params[:id]
+        article_id = params[:id].to_i
         user = active_user
         # potential place to think about edge cases where someone could make a get request
         # this will return nil if the article isn't found
@@ -24,10 +24,9 @@ module Api
         else
           Like.create(user_id: user.id, article_id: article_id)
         end
+        is_liked = !!user.likes.find_by(article_id: article_id)
+        render json: {userId: user.id, articleId: article_id, isLiked: is_liked}
       end
-
-
-
 
       def create
       end

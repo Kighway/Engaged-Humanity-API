@@ -25,7 +25,10 @@ module Api
           Like.create(user_id: user.id, article_id: article_id)
         end
         is_liked = !!user.likes.find_by(article_id: article_id)
-        render json: {userId: user.id, articleId: article_id, isLiked: is_liked}
+
+#        render json: {userId: user.id, articleId: article_id, isLiked: is_liked}
+        render json: user.article_ids
+
       end
 
       def create

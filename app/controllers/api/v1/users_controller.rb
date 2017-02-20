@@ -64,11 +64,18 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  def check_username
+
+    is_valid = !User.find_by(username: params[:input])
+
+    render json: {valid: is_valid}
+  end
+
 
   private
 
   def create_user_params
-    params.permit(:first_name, :last_name, :username, :password, :password_confirmation)
+    params.permit(:first_name, :last_name, :username, :email, :password, :password_confirmation)
   end
 
   def login_params

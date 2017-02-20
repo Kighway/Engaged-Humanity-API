@@ -2,11 +2,11 @@
 # USERS
 #
 
-jenny = User.create({first_name: "Jenny", last_name: "Kats", username: "jennyk", password: "1234"})
-kyle = User.create({first_name: "Kyle", last_name: "Tulod", username: "kylet", password: "1234"})
-andrew = User.create({first_name: "Andrew", last_name: "Nease", username: "andrewn", password: "1234"})
-kyle_friend = User.create({first_name: "Kylo", last_name: "Peterson", username: "kylop", password: "1234"})
-jerk = User.create({first_name: "Donald", last_name: "Unger", username: "donaldu", password: "1234"})
+jenny = User.create({first_name: "Jenny", last_name: "Kats", username: "jennyk", email: "jenny@fake.com", password: "1234"})
+kyle = User.create({first_name: "Kyle", last_name: "Tulod", username: "kylet", email: "kyle@fake.com", password: "1234"})
+andrew = User.create({first_name: "Andrew", last_name: "Nease", username: "andrewn", email: "andrew@fake.com", password: "1234"})
+kyle_friend = User.create({first_name: "Kylo", last_name: "Peterson", username: "kylop", email: "kylefriend@fake.com", password: "1234"})
+jerk = User.create({first_name: "Donald", last_name: "Unger", username: "donaldu", email: "jerk@fake.com", password: "1234"})
 
 #
 # FRIENDSHIPS

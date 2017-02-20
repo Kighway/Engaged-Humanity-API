@@ -11,7 +11,8 @@ Rails.application.routes.draw do
       post 'articles/:id/like', to: 'articles#like_article'
       post 'add-interest', to: 'users#add_interest'
       post 'switch-like', to: 'articles#switch_like'
-
+      post 'check-username', to: 'users#check_username'
+      get 'interests', to: 'interests#index'
     end
   end
 

@@ -38,9 +38,11 @@ class Api::V1::UsersController < ApplicationController
 
   def add_interest
 
-    add_interest_params[:interest]
-
-    interest = Interest.find_by(title: add_interest_params[:interest])
+    if add_interest_params[:id] == "submit"
+      interest = Interest.find_by(title: add_interest_params[:interest])
+    else
+      interest = Interest.find(add_interest_params[:id])
+    end
 
     # if the interest exist...
     if interest
@@ -52,13 +54,15 @@ class Api::V1::UsersController < ApplicationController
         # return the interest
         render json: interest
       else
-        # return the interest
-        render json: interest
+        # if the active user does have this interest...
+        render json: interest, serializer: InterestCheckSerializer
       end
     else
-
       # create Interest and return it
       new_interest = Interest.create(title: add_interest_params[:interest])
+
+      # add the interest to the user
+      active_user.interests << new_interest
 
       render json: new_interest
     end
@@ -83,7 +87,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def add_interest_params
-    params.permit(:interest)
+    params.permit(:interest, :id)
   end
 
 end

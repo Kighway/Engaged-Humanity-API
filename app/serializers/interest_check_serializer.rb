@@ -1,9 +1,9 @@
-class InterestSerializer < ActiveModel::Serializer
+class InterestCheckSerializer < ActiveModel::Serializer
   attributes :id, :title, :duplicate
 
 
   def duplicate
-    false
+    true
   end
 
 end

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get 'current_user', to: 'users#the_current_user'
       post 'articles/:id/like', to: 'articles#like_article'
       post 'add-interest', to: 'users#add_interest'
+      post 'switch-like', to: 'articles#switch_like'
 
     end
   end

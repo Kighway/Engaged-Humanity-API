@@ -69,17 +69,13 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def toggle_following
-
-    follower_id = params[:id].to_i
+    friend_id = params[:id].to_i
     user = active_user
-
-    if user.following_ids.include?(params[:id])
-      user.following_ids = user.following_ids - [params[:id]]
+    if user.followings.find_by(id: friend_id)
+      Friendship.where(user_id: user.id, friend_id: friend_id).destroy_all
     else
-      user.following_ids << follower_id
-#      binding.pry
+      user.followings << User.find(friend_id)
     end
-
     render json: user
   end
 

@@ -108,7 +108,7 @@ class Api::V1::UsersController < ApplicationController
   private
 
   def create_user_params
-    params.permit(:first_name, :last_name, :username, :email, :password, :password_confirmation)
+    params.permit(:first_name, :last_name, :username, :email, :password, :password_confirmation, :profile_url)
   end
 
   def login_params

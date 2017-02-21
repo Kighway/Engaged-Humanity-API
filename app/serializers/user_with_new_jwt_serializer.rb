@@ -1,5 +1,5 @@
 class UserWithNewJwtSerializer < ActiveModel::Serializer
-  attributes :id, :first_name, :last_name, :username, :jwt
+  attributes :id, :first_name, :last_name, :username, :profile_url, :jwt
 
 
   has_many :interests

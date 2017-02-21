@@ -68,6 +68,35 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  def toggle_following
+
+    follower_id = params[:id].to_i
+    user = active_user
+
+    if user.following_ids.include?(params[:id])
+      user.following_ids = user.following_ids - [params[:id]]
+    else
+      user.following_ids << follower_id
+#      binding.pry
+    end
+
+    render json: user
+  end
+
+  def search_following
+    key = "%#{params[:query]}%"
+    @users = User.where('username LIKE :search', search: key).order(:username).limit(3)
+
+    if @users
+      render json: { potential_followings: @users.map { |user| { id: user.id, first_name: user.first_name, last_name: user.last_name, username: user.username, profile_url: user.profile_url } } }
+    else
+      render json: { potential_followings: [] }
+    end
+# Is there a way to pass a collection into a serializer?
+#    render json: @users, serializer: UsersLimitedSerializer
+  end
+
+
   def check_username
 
     is_valid = !User.find_by(username: params[:input])

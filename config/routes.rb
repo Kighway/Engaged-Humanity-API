@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       post 'check-username', to: 'users#check_username'
       post 'articles/new', to: 'articles#create'
       get 'interests', to: 'interests#index'
+      post 'remove-interest', to: 'users#remove_interest'
     end
   end
 

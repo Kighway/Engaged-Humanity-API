@@ -34,15 +34,15 @@ cats = Interest.create(title: "cats")
 #
 # ARTICLES
 #
-article1 = Article.create({title: "Cat are fantastic.", description: "An article about Cats.", link: "http://www.link1.com", source: "Cat Fancy Mag", author: "Caterina Snowbottom", image_url: "http://www.link1.com/cat.jpg", date: "date is a currently a string"})
+article1 = Article.create({title: "Cat are fantastic.", description: "An article about Cats.", url: "http://www.url1.com", source: "Cat Fancy Mag", author: "Caterina Snowbottom", image_url: "http://www.url1.com/cat.jpg", date: "date is a currently a string"})
 
-article2 = Article.create({title: "Dogs are wonderful.", description: "An article about Dogs.", link: "http://www.link2.com", source: "Dog Power Mag", author: "Rex Fido", image_url: "http://www.link2.com/dog.jpg", date: "date is a currently a string"})
+article2 = Article.create({title: "Dogs are wonderful.", description: "An article about Dogs.", url: "http://www.url2.com", source: "Dog Power Mag", author: "Rex Fido", image_url: "http://www.url2.com/dog.jpg", date: "date is a currently a string"})
 
-article3 = Article.create({title: "Puppies pee a lot.", description: "A second article about Dogs.", link: "http://www.link3.com", source: "Dog Power Mag", author: "Rex Fido", image_url: "http://www.link3.com/dog2.jpg", date: "date is a currently a string"})
+article3 = Article.create({title: "Puppies pee a lot.", description: "A second article about Dogs.", url: "http://www.url3.com", source: "Dog Power Mag", author: "Rex Fido", image_url: "http://www.url3.com/dog2.jpg", date: "date is a currently a string"})
 
-article4 = Article.create({title: "It's raining cats and dogs.", description: "An article about cats and dogs.", link: "http://www.link4.com", source: "Dogs and Cats Together Mag", author: "Max Headspace", image_url: "http://www.link4.com/cat_and_dog.jpg", date: "date is a currently a string"})
+article4 = Article.create({title: "It's raining cats and dogs.", description: "An article about cats and dogs.", url: "http://www.url4.com", source: "Dogs and Cats Together Mag", author: "Max Headspace", image_url: "http://www.url4.com/cat_and_dog.jpg", date: "date is a currently a string"})
 
-article5 = Article.create({title: "Puppies pee.  So what?", description: "An article about puppies still peeing.", link: "http://www.link5.com", source: "Puppy Power Mag", author: "Max Headspace", image_url: "http://www.link5.com/peeing_puppy.jpg", date: "date is still a string"})
+article5 = Article.create({title: "Puppies pee.  So what?", description: "An article about puppies still peeing.", url: "http://www.url5.com", source: "Puppy Power Mag", author: "Max Headspace", image_url: "http://www.url5.com/peeing_puppy.jpg", date: "date is still a string"})
 
 #
 # ARTICLE INTERESTS

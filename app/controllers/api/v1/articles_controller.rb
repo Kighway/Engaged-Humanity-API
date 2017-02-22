@@ -32,7 +32,42 @@ module Api
       end
 
       def create
+
+        article = Article.find_by(url: params[:url])
+
+        if article
+          if !active_user.article_ids.include? article.id
+            active_user.articles << article
+          end
+        else
+          new_article = Article.create(create_article_params)
+
+          interest = Interest.find_by(title: params[:interests])
+
+          if !interest
+            interest = Interest.create(title: params[:interests])
+          end
+
+          new_article.interests << interest
+
+          active_user.articles << new_article
+        end
+
+        render json: active_user.article_ids
+
+
       end
+
+      private
+
+      def create_article_params
+        params.permit(:url, :title, :description, :source, :author, :image_url, :date)
+      end
+
+
     end
   end
+
+
+
 end

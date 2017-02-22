@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       post 'toggle-following', to: 'users#toggle_following'
       post 'switch-like', to: 'articles#switch_like'
       post 'check-username', to: 'users#check_username'
+      post 'articles/new', to: 'articles#create'
       get 'interests', to: 'interests#index'
     end
   end

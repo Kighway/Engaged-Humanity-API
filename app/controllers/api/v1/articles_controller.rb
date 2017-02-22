@@ -42,6 +42,7 @@ module Api
         else
           new_article = Article.create(create_article_params)
 
+          #
           interest = Interest.find_by(title: params[:interests])
 
           if !interest
@@ -49,6 +50,7 @@ module Api
           end
 
           new_article.interests << interest
+          active_user.interests << interest
 
           active_user.articles << new_article
         end

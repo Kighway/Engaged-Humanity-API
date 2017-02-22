@@ -69,6 +69,37 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+
+
+
+  def remove_interest
+
+    active_user.interests.delete(params[:id])
+
+      render json: active_user
+  end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   def toggle_following
     friend_id = params[:id].to_i
     user = active_user

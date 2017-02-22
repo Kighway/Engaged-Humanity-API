@@ -24,6 +24,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def the_current_user
+
     session_data_jwt = request.headers['HTTP_AUTHORIZATION']
 
     if session_data_jwt.length == 0

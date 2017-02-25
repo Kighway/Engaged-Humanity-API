@@ -16,8 +16,13 @@ class Api::V1::UsersController < ApplicationController
   def login
     user = User.find_by(username: login_params[:username]).try(:authenticate, login_params[:password])
 
+
     if user
-      render json: user, serializer: UserWithNewJwtSerializer
+      # options = {serializer: ActiveModel::Serializer::UserWithNewJwtSerializer}
+      # temp = ActiveModelSerializers::SerializableResource.new(user, options)
+      # render json: temp
+
+      render json: user, serializer: ActiveModel::Serializer::UserWithNewJwtSerializer
     else
       render json: {error: "username and/or password not valid"}
     end

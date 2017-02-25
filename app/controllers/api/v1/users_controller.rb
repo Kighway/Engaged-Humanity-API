@@ -104,8 +104,6 @@ class Api::V1::UsersController < ApplicationController
 
     is_valid = !User.find_by(username: params[:input])
 
-    binding.pry
-
     x = Auth.encrypt('dog')
 
     render json: {valid: is_valid}

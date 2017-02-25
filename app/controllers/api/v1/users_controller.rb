@@ -18,11 +18,7 @@ class Api::V1::UsersController < ApplicationController
 
 
     if user
-      # options = {serializer: ActiveModel::Serializer::UserWithNewJwtSerializer}
-      # temp = ActiveModelSerializers::SerializableResource.new(user, options)
-      # render json: temp
-
-      render json: user, serializer: ActiveModel::Serializer::UserWithNewJwtSerializer
+      render json: user, serializer: UserWithNewJwtSerializer
     else
       render json: {error: "username and/or password not valid"}
     end
@@ -107,6 +103,8 @@ class Api::V1::UsersController < ApplicationController
   def check_username
 
     is_valid = !User.find_by(username: params[:input])
+
+    x = Auth.encrypt('dog')
 
     render json: {valid: is_valid}
   end

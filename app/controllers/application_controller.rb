@@ -6,6 +6,6 @@ class ApplicationController < ActionController::API
         user_info = Auth.decode(token)
         @active_user ||= User.find_by(id: user_info["userid"])
       end
-    end
+  end
 
 end

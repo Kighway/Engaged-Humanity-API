@@ -1,21 +1,22 @@
 class Api::V1::UsersController < ApplicationController
 
+  # create new user
   def create
     user =User.create(create_user_params)
 
-    # if the user is valid...
     if user.save
       render json: user, serializer: UserWithNewJwtSerializer
     else
-      render json: { error: "incorrect email or password"}
+      render json: { error: "Unable to create new user."}
     end
   end
 
+
+  # authenticate the user
   def login
-    # authenticate the user
     user = User.find_by(username: login_params[:username]).try(:authenticate, login_params[:password])
 
-    # if the login is valid...
+
     if user
       render json: user, serializer: UserWithNewJwtSerializer
     else
@@ -25,12 +26,12 @@ class Api::V1::UsersController < ApplicationController
 
   def the_current_user
 
-    session_data_jwt = request.headers['HTTP_AUTHORIZATION']
+    sessionStorage_jwt = request.headers['HTTP_AUTHORIZATION']
 
-    if session_data_jwt.length == 0
+    if sessionStorage_jwt.length == 0
       render json: {error: "the_current_user should not have been called from react." }
     else
-      jwt_user_id = Auth.decode(session_data_jwt)
+      jwt_user_id = Auth.decode(sessionStorage_jwt)
       user = User.find(jwt_user_id["userid"])
       render json: user
     end
@@ -45,7 +46,6 @@ class Api::V1::UsersController < ApplicationController
       interest = Interest.find(add_interest_params[:id])
     end
 
-    # if the interest exist...
     if interest
 
       # if the active user doesn't already have this interest...
@@ -70,35 +70,12 @@ class Api::V1::UsersController < ApplicationController
   end
 
 
-
-
   def remove_interest
 
     active_user.interests.delete(params[:id])
 
       render json: active_user
   end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   def toggle_following
     friend_id = params[:id].to_i
@@ -120,8 +97,6 @@ class Api::V1::UsersController < ApplicationController
     else
       render json: { potential_followings: [] }
     end
-# Is there a way to pass a collection into a serializer?
-#    render json: @users, serializer: UsersLimitedSerializer
   end
 
 

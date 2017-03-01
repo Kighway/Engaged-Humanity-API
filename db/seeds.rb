@@ -2,7 +2,7 @@
 # USERS
 #
 
-jenny = User.create({first_name: "Jenny", last_name: "Kats", username: "jennyk", email: "jenny@fake.com", profile_url: "../images/dummy.jpeg", password: "1234"})
+jenny = User.create({first_name: "Jenny", last_name: "Kats", username: "jennyk", email: "jenny@fake.com", profile_url: "../images/jenny.jpeg", password: "1234"})
 kyle = User.create({first_name: "Kyle", last_name: "Tulod", username: "kylet", email: "kyle@fake.com", profile_url: "../images/dummy.jpeg", password: "1234"})
 andrew = User.create({first_name: "Andrew", last_name: "Nease", username: "andrewn", email: "andrew@fake.com", profile_url: "../images/dummy.jpeg", password: "1234"})
 kyle_friend = User.create({first_name: "Kylo", last_name: "Peterson", username: "kylop", profile_url: "../images/dummy.jpeg", email: "kylefriend@fake.com", password: "1234"})
